@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Play, Pause, FastForward, Clock, Cpu } from 'lucide-react';
+import { Play, Pause, Clock, Cpu } from 'lucide-react';
 import type { ForecastHorizonData } from '../../types';
 
 interface TimelineSliderProps {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
-import { Layers, Eye, ShieldAlert, Waves, MapPin, Maximize2 } from 'lucide-react';
+import { Layers, Maximize2 } from 'lucide-react';
 import type { InundationZone, RegionInfo, WeatherStation } from '../../types';
 import { MOCK_RIVERS } from '../../services/mockData';
 

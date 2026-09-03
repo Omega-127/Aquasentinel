@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertOctagon, Activity, ShieldCheck, Clock } from 'lucide-react';
+import { AlertOctagon, ShieldCheck, Clock } from 'lucide-react';
 import type { OverallRiskData } from '../../types';
 
 interface RiskGaugeProps {

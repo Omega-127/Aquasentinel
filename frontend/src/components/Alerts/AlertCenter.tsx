@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AlertCircle, ShieldAlert, CheckCircle2, ChevronDown, ChevronUp, Radio, PhoneCall } from 'lucide-react';
+import { CheckCircle2, ChevronDown, ChevronUp, Radio, PhoneCall } from 'lucide-react';
 import type { AlertItem } from '../../types';
 
 interface AlertCenterProps {
@@ -35,23 +35,23 @@ export const AlertCenter: React.FC<AlertCenterProps> = ({ alerts }) => {
 
       {/* Alerts List */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        {alerts.map((alert) => {
-          const isExpanded = expandedId === alert.id;
-          const isSevere = alert.severity === 'SEVERE';
+        {alerts.map((item) => {
+          const isExpanded = expandedId === item.id;
+          const isSevere = item.severity === 'SEVERE';
 
           let borderCol = 'var(--border-subtle)';
           let badgeClass = 'badge-moderate';
           if (isSevere) {
             borderCol = 'rgba(239, 68, 68, 0.4)';
             badgeClass = 'badge-severe';
-          } else if (alert.severity === 'HIGH') {
+          } else if (item.severity === 'HIGH') {
             borderCol = 'rgba(249, 115, 22, 0.4)';
             badgeClass = 'badge-high';
           }
 
           return (
             <div
-              key={alert.id}
+              key={item.id}
               style={{
                 borderRadius: 'var(--radius-md)',
                 background: 'rgba(255, 255, 255, 0.02)',
@@ -62,7 +62,7 @@ export const AlertCenter: React.FC<AlertCenterProps> = ({ alerts }) => {
             >
               {/* Header Row */}
               <div
-                onClick={() => toggleExpand(alert.id)}
+                onClick={() => toggleExpand(item.id)}
                 style={{
                   padding: '12px 14px',
                   display: 'flex',
@@ -74,16 +74,16 @@ export const AlertCenter: React.FC<AlertCenterProps> = ({ alerts }) => {
               >
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
                   <span className={`badge ${badgeClass}`} style={{ marginTop: '2px' }}>
-                    {alert.severity}
+                    {item.severity}
                   </span>
                   <div>
                     <h3 style={{ fontSize: '13px', fontWeight: 700, color: '#f8fafc', margin: 0 }}>
-                      {alert.title}
+                      {item.title}
                     </h3>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px', fontSize: '11px', color: '#94a3b8' }}>
-                      <span>Issued: <b style={{ color: '#cbd5e1' }}>{alert.issuedAt}</b></span>
+                      <span>Issued: <b style={{ color: '#cbd5e1' }}>{item.issuedAt}</b></span>
                       <span>•</span>
-                      <span>Wards: {alert.affectedWards.join(', ')}</span>
+                      <span>Wards: {item.affectedWards.join(', ')}</span>
                     </div>
                   </div>
                 </div>
@@ -111,7 +111,7 @@ export const AlertCenter: React.FC<AlertCenterProps> = ({ alerts }) => {
                   {/* Impact Summary */}
                   <div style={{ marginTop: '10px', fontSize: '12px', color: '#e2e8f0', lineHeight: 1.5 }}>
                     <span style={{ fontWeight: 600, color: '#38bdf8' }}>Impact Projection: </span>
-                    {alert.impact}
+                    {item.impact}
                   </div>
 
                   {/* Recommendations */}
@@ -120,7 +120,7 @@ export const AlertCenter: React.FC<AlertCenterProps> = ({ alerts }) => {
                       Civic Response & Evacuation Protocols:
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                      {alert.recommendations.map((rec, idx) => (
+                      {item.recommendations.map((rec, idx) => (
                         <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', fontSize: '12px', color: '#cbd5e1' }}>
                           <CheckCircle2 size={14} color="#34d399" style={{ marginTop: '2px', flexShrink: 0 }} />
                           <span>{rec}</span>
@@ -147,7 +147,7 @@ export const AlertCenter: React.FC<AlertCenterProps> = ({ alerts }) => {
                       style={{ fontSize: '11px', padding: '4px 8px' }}
                       onClick={(e) => {
                         e.stopPropagation();
-                        alert(`Broadcasting alert for ${alert.affectedWards.join(', ')} to Civil Defense Team.`);
+                        window.alert(`Broadcasting alert for ${item.affectedWards.join(', ')} to Civil Defense Team.`);
                       }}
                     >
                       Acknowledge
